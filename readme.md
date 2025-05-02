@@ -43,14 +43,17 @@ python src/start.py
 - Requests
 - Pydantic
 - Threading
+- httpx (para testes)
+- Pytest (para testes automatizados)
 
 ## 📁 Arquivos
 
-| Arquivo      | Descrição                                        |
-| ------------ | ------------------------------------------------ |
-| `api.py`     | Define a API com os endpoints REST               |
-| `estoque.py` | Interface gráfica com funcionalidades de estoque |
-| `start.py`   | Inicializa a API e a interface gráfica juntas    |
+| Arquivo       | Descrição                                        |
+| ------------  | ------------------------------------------------ |
+| `api.py`      | Define a API com os endpoints REST               |
+| `estoque.py`  | Interface gráfica com funcionalidades de estoque |
+| `start.py`    | Inicializa a API e a interface gráfica juntas    |
+| `test_api.py` | Teste automatizados da API com FastAPI TestClient|
 
 
 ## 💠 Comandos Úteis
@@ -65,6 +68,15 @@ Rodar só a interface (a API precisa já estar rodando):
 
 ```bash
 python src/estoque.py
+```
+
+Rodar os testeautomatizados
+
+```bash
+set PYTHONPATH=src  # Windows
+pytest test/
+
+PYTHONPATH=src pytest test/  # Linux/macOS
 ```
 
 ## 👩🏻‍💻 Desenvolvedores
