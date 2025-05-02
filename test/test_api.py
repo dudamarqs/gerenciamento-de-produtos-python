@@ -1,5 +1,8 @@
 import sys
 import os
+
+# Adiciona o diretório '../src' ao início da lista de caminhos onde o Python procura por módulos para importar.
+# Isso permite importar arquivos da pasta 'src', mesmo que o script de teste esteja em outra pasta.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 from fastapi.testclient import TestClient
