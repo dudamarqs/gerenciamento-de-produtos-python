@@ -90,5 +90,6 @@ python src/estoque.py
 
 ## Considerações
 
+* O sistema não possui banco de dados; os dados ficam em memória.
 * Ideal para fins didáticos ou como base para evolução com banco de dados.
 * O código é modular, facilitando a expansão com autenticação real, banco de dados, etc.
