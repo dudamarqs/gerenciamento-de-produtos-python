@@ -1,6 +1,9 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QMessageBox
+from PyQt6.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, 
+    QTableWidgetItem, QLineEdit, QMessageBox
+)
 import sys
-import requests 
+import requests
 
 class Produto:
     def __init__(self, nome, quantidade, preco, categoria):
@@ -18,7 +21,6 @@ class LoginApp(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-
         self.usuario_input = QLineEdit()
         self.usuario_input.setPlaceholderText("Usuário")
         layout.addWidget(self.usuario_input)
@@ -45,14 +47,11 @@ class LoginApp(QWidget):
             QMessageBox.warning(self, "Erro", "Usuário ou senha incorretos.")
 
     def validar_login(self, usuario, senha):
-        if usuario == "usuario" and senha == "123":
-            return True
-        return False
+        return usuario == "usuario" and senha == "123"
 
     def abre_estoque_app(self):
         self.estoque_app = EstoqueApp()
         self.estoque_app.show()
-
 
 class EstoqueApp(QWidget):
     def __init__(self):
@@ -91,6 +90,10 @@ class EstoqueApp(QWidget):
         self.btn_add.clicked.connect(self.adicionar_produto)
         layout.addWidget(self.btn_add)
 
+        self.btn_atualizar = QPushButton("Atualizar Produto")
+        self.btn_atualizar.clicked.connect(self.atualizar_produto)
+        layout.addWidget(self.btn_atualizar)
+
         self.btn_remover = QPushButton("Remover Produto")
         self.btn_remover.clicked.connect(self.remover_produto)
         layout.addWidget(self.btn_remover)
@@ -111,7 +114,6 @@ class EstoqueApp(QWidget):
                 "categoria": categoria
             }
 
-            
             try:
                 response = requests.post("http://localhost:8000/produtos", json=produto)
                 if response.status_code == 200:
@@ -143,13 +145,52 @@ class EstoqueApp(QWidget):
         for i, produto in enumerate(self.produtos):
             self.tabela.setItem(i, 0, QTableWidgetItem(produto.nome))
             self.tabela.setItem(i, 1, QTableWidgetItem(str(produto.quantidade)))
-            self.tabela.setItem(i, 2, QTableWidgetItem(f"R$ {produto.preco:.2f}"))
+            self.tabela.setItem(i, 2, QTableWidgetItem(f"{produto.preco:.2f}"))
             self.tabela.setItem(i, 3, QTableWidgetItem(produto.categoria))
+
+    def atualizar_produto(self):
+        linha = self.tabela.currentRow()
+        if linha == -1:
+            QMessageBox.warning(self, "Erro", "Selecione um produto para atualizar.")
+            return
+
+        nome = self.nome_input.text()
+        quantidade = self.quantidade_input.text()
+        preco = self.preco_input.text()
+        categoria = self.categoria_input.text()
+
+        try:
+            quantidade_int = int(quantidade)
+            preco_float = float(preco)
+        except ValueError:
+            QMessageBox.warning(self, "Erro", "Quantidade deve ser número inteiro e preço deve ser número válido.")
+            return
+
+        if nome and categoria:
+            produto = {
+                "nome": nome,
+                "quantidade": quantidade_int,
+                "preco": preco_float,
+                "categoria": categoria
+            }
+
+            try:
+                response = requests.put(f"http://localhost:8000/produtos/{linha}", json=produto)
+                if response.status_code == 200:
+                    QMessageBox.information(self, "Sucesso", "Produto atualizado com sucesso!")
+                    self.carregar_produtos()
+                else:
+                    QMessageBox.warning(self, "Erro", f"Erro ao atualizar produto na API. Código: {response.status_code}")
+            except Exception as e:
+                QMessageBox.critical(self, "Erro de Conexão", str(e))
+
+            self.limpar_campos()
+        else:
+            QMessageBox.warning(self, "Erro", "Preencha todos os campos corretamente.")
 
     def remover_produto(self):
         linha = self.tabela.currentRow()
         if linha != -1:
-            produto = self.produtos[linha]
             try:
                 response = requests.delete(f"http://localhost:8000/produtos/{linha}")
                 if response.status_code == 200:
