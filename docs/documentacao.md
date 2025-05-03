@@ -74,9 +74,12 @@ python src/estoque.py
 
 ### API (FastAPI)
 
-* `GET /produtos`: Retorna a lista de produtos cadastrados.
-* `POST /produtos`: Adiciona um novo produto.
-* `DELETE /produtos/{index}`: Remove um produto pelo índice.
+| Método | Rota                | Descrição                               |
+| ------ | ------------------- | --------------------------------------- |
+| GET    | `/produtos`         | Retorna a lista de produtos cadastrados |
+| POST   | `/produtos`         | Adiciona um novo produto                |
+| PUT    | `/produtos/{index}` | Atualiza um produto pelo índice         |
+| DELETE | `/produtos/{index}` | Remove um produto pelo índice           |
 
 ### Interface Gráfica (PyQt6)
 
@@ -84,6 +87,7 @@ python src/estoque.py
 * Cadastro de produtos (nome, quantidade, preço, categoria)
 * Listagem em tabela
 * Remoção de produtos via seleção na tabela
+* Atualização de produtos via seleção, preenchimento dos campos e clique no botão Atualizar Produto
 
 ## Dados de Acesso
 
@@ -92,6 +96,6 @@ python src/estoque.py
 
 ## Considerações
 
-* O sistema não possui banco de dados; os dados ficam em memória.
+* O sistema não possui banco de dados; os dados ficam em memória durante a execução.
 * Ideal para fins didáticos ou como base para evolução com banco de dados.
 * O código é modular, facilitando a expansão com autenticação real, banco de dados, etc.
