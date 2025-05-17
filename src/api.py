@@ -1,10 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
+from fastapi import HTTPException
 
 app = FastAPI()
 
-class ProdutoModel(BaseModel): 
+class ProdutoModel(BaseModel):
     nome: str
     quantidade: int
     preco: float
@@ -26,7 +27,7 @@ def remover_produto(index: int):
     if 0 <= index < len(estoque):
         removido = estoque.pop(index)
         return {"mensagem": "Produto removido", "produto": removido}
-    raise HTTPException(status_code=404, detail="Índice inválido")
+    return {"erro": "Índice inválido"}
 
 @app.put("/produtos/{index}", response_model=ProdutoModel)
 def atualizar_produto(index: int, produto: ProdutoModel):
