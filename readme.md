@@ -45,6 +45,7 @@ python src/start.py
 - Threading
 - httpx (para testes)
 - Pytest (para testes automatizados)
+- Cypress (teste E2E)
 
 ## 📁 Arquivos
 
@@ -54,6 +55,7 @@ python src/start.py
 | `estoque.py`  | Interface gráfica com funcionalidades de estoque |
 | `start.py`    | Inicializa a API e a interface gráfica juntas    |
 | `test_api.py` | Teste automatizados da API com FastAPI TestClient|
+| `cypress`     | Armazena arquivos de configuração de teste E2E   |
 
 
 ## 💠 Comandos Úteis
@@ -70,7 +72,7 @@ Rodar só a interface (a API precisa já estar rodando):
 python src/estoque.py
 ```
 
-Rodar os testeautomatizados
+Rodar os testes automatizados
 
 ```bash
 set PYTHONPATH=src  # Windows
