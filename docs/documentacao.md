@@ -7,6 +7,7 @@ Este é um sistema de controle de estoque composto por:
 * Uma **API REST** desenvolvida com **FastAPI** para gerenciamento de produtos em memória.
 * Uma **interface gráfica** usando **PyQt6** que se comunica com a API via HTTP.
 * Um inicializador que executa ambos os componentes.
+* Um conjunto de testes automatizados para garantir o correto funcionamento da API e da interface, incluindo testes end-to-end com Cypress.
 
 ## Estrutura do Projeto
 
@@ -17,8 +18,12 @@ projeto_estoque/
 │   ├── estoque.py     # Interface gráfica PyQt6
 │   └── start.py       # Inicializa API e GUI
 ├── test/
-│   └── test_api.py    # Testes da API
-├── requirements.txt   # Dependências
+│   └── test_api.py    # Testes automatizados da API (Pytest)
+├── cypress/
+│   ├── e2e/           # Testes E2E com Cypress
+│   └── ...            # Arquivos de configuração do Cypress
+├── requirements.txt   # Dependências Python
+├── package.json       # Dependências do Cypress (Node.js)
 ├── README.md          # Guia de uso
 └── docs/
     └── documentacao.md  # Documentação completa
@@ -98,4 +103,4 @@ python src/estoque.py
 
 * O sistema não possui banco de dados; os dados ficam em memória durante a execução.
 * Ideal para fins didáticos ou como base para evolução com banco de dados.
-* O código é modular, facilitando a expansão com autenticação real, banco de dados, etc.
+* O código é modular, facilitando a expansão com autenticação real, banco de dados, interface web etc.
