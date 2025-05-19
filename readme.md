@@ -44,18 +44,20 @@ python src/start.py
 - Pydantic
 - Threading
 - httpx (para testes)
-- Pytest (para testes automatizados)
+- Pytest (para testes unitários)
 - Cypress (teste E2E)
 
 ## 📁 Arquivos
 
-| Arquivo       | Descrição                                        |
-| ------------  | ------------------------------------------------ |
-| `api.py`      | Define a API com os endpoints REST               |
-| `estoque.py`  | Interface gráfica com funcionalidades de estoque |
-| `start.py`    | Inicializa a API e a interface gráfica juntas    |
-| `test_api.py` | Teste automatizados da API com FastAPI TestClient|
-| `cypress`     | Armazena arquivos de configuração de teste E2E   |
+| Arquivo/Pasta      | Descrição                                          |
+| ------------------ | -------------------------------------------------- |
+| `src/api.py`       | Define a API com os endpoints REST                 |
+| `src/estoque.py`   | Interface gráfica com funcionalidades de estoque   |
+| `src/start.py`     | Inicializa a API e a interface gráfica juntas      |
+| `test/test_api.py` | Testes automatizados da API com FastAPI TestClient |
+| `cypress/`         | Testes E2E simulando ações reais na interface      |
+| `requirements.txt` | Dependências do projeto Python                     |
+| `package.json`     | Configurações e scripts do Cypress (via Node.js)   |
 
 
 ## 💠 Comandos Úteis
